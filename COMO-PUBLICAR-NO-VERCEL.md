@@ -16,7 +16,7 @@ Os documentos, PDFs, planilhas e arquivos de desenvolvimento continuam preservad
 1. Crie um repositório no GitHub.
 2. Envie o conteúdo da pasta `campanha e assistente` para esse repositório.
 3. No Vercel, clique em **New Project** e importe o repositório.
-4. Em **Root Directory**, escolha `site`.
+4. Em **Root Directory**, mantenha a raiz (`./`).
 5. Use **Other** como framework e deixe o comando de build vazio.
 6. Clique em **Deploy**.
 
@@ -27,7 +27,7 @@ Depois, teste:
 
 ## Opção pelo terminal
 
-Abra o terminal dentro da pasta `site` e execute:
+Abra o terminal dentro da raiz do repositório e execute:
 
 ```powershell
 npm.cmd install -g vercel
