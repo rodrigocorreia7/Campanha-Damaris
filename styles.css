@@ -1684,8 +1684,8 @@ h1, h2, h3, h4, h5, h6 {
   .hero-grid, .defender-grid, .movimento-grid {
     grid-template-columns: 1fr;
     grid-template-areas:
-      "content"
       "image"
+      "content"
       "stats";
     gap: 3rem;
   }
