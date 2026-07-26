@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "version": "1.0.0",
+  "dependencies": {
+    "@google/genai": "^2.4.0"
+  }
+}
