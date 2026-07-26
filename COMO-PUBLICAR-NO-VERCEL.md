@@ -42,4 +42,4 @@ vercel --prod
 
 ## Importante sobre a IA
 
-O frontend do assistente está em `assistente/`, mas as respostas Gemini usam o endpoint `/api/chat`. Para respostas ao vivo, o backend Express precisa ser publicado como função/API do Vercel ou em um serviço separado, com `GEMINI_API_KEY` configurada como variável de ambiente. Nunca coloque essa chave dentro do HTML ou do JavaScript público.
+O frontend do assistente está em `assistente/` e a função real da API está em `api/chat.ts`. Configure `GEMINI_API_KEY` no ambiente **Production** do Vercel e faça um novo redeploy. Nunca coloque essa chave dentro do HTML ou do JavaScript público. Para verificar a API, acesse `/api/health` e confirme `hasApiKey: true`.
