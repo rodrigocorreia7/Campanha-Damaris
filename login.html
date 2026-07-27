@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acesso privado | Dra. Damaris Moura</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+  <main class="auth-shell">
+    <section class="auth-card" aria-labelledby="auth-title">
+      <div class="brand-row">
+        <div class="brand-mark">DM</div>
+        <div>
+          <p class="eyebrow">Apresentação privada</p>
+          <h1 id="auth-title">Dra. Damaris Moura</h1>
+        </div>
+      </div>
+
+      <p class="lead">
+        Este site e a assistente virtual estão em análise. O acesso é liberado somente por convite e expira em 48 horas.
+      </p>
+
+      <div class="tabs" role="tablist" aria-label="Escolha o tipo de acesso">
+        <button class="tab is-active" type="button" data-auth-tab="login">Entrar</button>
+        <button class="tab" type="button" data-auth-tab="register">Primeiro acesso</button>
+      </div>
+
+      <form class="auth-form is-active" id="login-form">
+        <label>
+          E-mail
+          <input type="email" name="email" autocomplete="email" required>
+        </label>
+        <label>
+          Senha
+          <input type="password" name="password" autocomplete="current-password" required>
+        </label>
+        <button class="primary-button" type="submit">Entrar na apresentação</button>
+      </form>
+
+      <form class="auth-form" id="register-form">
+        <label>
+          Código do convite
+          <input type="text" name="inviteCode" autocomplete="one-time-code" placeholder="DAMARIS-XXXX" required>
+        </label>
+        <label>
+          Nome
+          <input type="text" name="displayName" autocomplete="name" required>
+        </label>
+        <label>
+          E-mail
+          <input type="email" name="email" autocomplete="email" required>
+        </label>
+        <label>
+          Criar senha
+          <input type="password" name="password" autocomplete="new-password" minlength="8" required>
+        </label>
+        <button class="primary-button" type="submit">Liberar acesso por 48h</button>
+      </form>
+
+      <p class="status-message" id="auth-status" role="status" aria-live="polite"></p>
+
+      <p class="footnote">
+        Cada login derruba automaticamente qualquer sessão anterior do mesmo e-mail.
+      </p>
+    </section>
+  </main>
+
+  <script src="auth.js"></script>
+</body>
+</html>

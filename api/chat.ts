@@ -1,5 +1,6 @@
 import { GoogleGenAI } from '@google/genai';
 import { FAQ_SYSTEM_PROMPT } from './dossier';
+import { validateSessionFromCookie } from '../lib/auth';
 
 type ChatMessage = {
   sender?: 'user' | 'assistant';
@@ -9,6 +10,11 @@ type ChatMessage = {
 export default async function handler(req: any, res: any) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Método não permitido.' });
+  }
+
+  const validSession = await validateSessionFromCookie(req.headers.cookie || null);
+  if (!validSession) {
+    return res.status(401).json({ error: 'Acesso privado. Faça login para conversar com a assistente.' });
   }
 
   const body = typeof req.body === 'string' ? JSON.parse(req.body) : (req.body || {});

@@ -1,7 +1,11 @@
 {
   "private": true,
   "version": "1.0.0",
+  "scripts": {
+    "generate:invites": "node scripts/generate-invites.mjs --count=10 --hours=48"
+  },
   "dependencies": {
-    "@google/genai": "^2.4.0"
+    "@google/genai": "^2.4.0",
+    "@vercel/functions": "^3.7.6"
   }
 }
