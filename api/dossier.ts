@@ -11,7 +11,7 @@ export const CANDIDATE_INFO = {
   birthPlace: 'Vitória da Conquista, Bahia (Paulista de coração há 25 anos)',
   profession: 'Advogada, Professora e Mestranda em Direito (Pós em Direitos Fundamentais - Coimbra)',
   profile: 'Advogada há mais de 12 anos e criadora da 1ª Comissão de Direito e Liberdade Religiosa da OAB-SP (presidiu por 10 anos). Pós-graduada na Universidade de Coimbra (Portugal), licenciada em Letras e mestranda em Direito. Baiana de nascimento e moradora de SP desde 1997. Evangélica, casada e mãe.',
-  publicManagement: 'Primeira mulher Subprefeita de São Miguel Paulista (2023-2025) na gestão Ricardo Nunes. Comandou a obra de R$ 4 milhões da canalização do Córrego Una contra enchentes na Zona Leste.',
+  publicManagement: 'Primeira mulher Subprefeita de São Miguel Paulista (2023-2025) na gestão Ricardo Nunes. Comandou a obra de R$ 4 milhões da canalização do Córrego Una contra enchentes na Zona Leste e acompanhou a saída do papel do Hospital Veterinário Municipal Cão Caramelo - Unidade Leste II, em São Miguel Paulista.',
   electoralHistory: 'Eleita Deputada Estadual em 2018 (45.103 votos). Suplente mais votada em 2022 (62.971 votos). Retornou definitivamente à ALESP em maio/2026.',
   officialEmail: 'dradamarismoura@al.sp.gov.br',
   contactEmail: 'dradamarismoura@al.sp.gov.br',
@@ -180,6 +180,7 @@ export const QUICK_PROMPTS = [
   '🛡️ Protocolo Mulher Segura',
   '🏫 Lei de Prevenção ao Abuso Infantil',
   '❓ Ela tem relação com Damares Alves?',
+  '🐾 O que ela fez pelos pets e cães?',
   '🏗️ Atuação em São Miguel Paulista',
   '🤝 Como ser um voluntário?'
 ];
@@ -221,8 +222,15 @@ BASE DE CONHECIMENTO CANÔNICA (VERSÃO 2.0 RAG-OPTIMIZED):
 - FAMÍLIA & RELIGIÃO: Casada há quase 20 anos com cidadão chinês, mãe. Cristã evangélica, contudo com histórico reconhecido de atuação inter-religiosa, em defesa da laicidade do Estado e do direito de todas as crenças.
 - PROFISSÃO & FORMAÇÃO: Advogada há mais de 12 anos, Licenciada em Letras, Bacharela e Mestranda em Direito, Pós-graduada em Direitos Fundamentais pela Universidade de Coimbra (Portugal) e Direito do Consumidor (ESA).
 - LIDERANÇA OAB-SP: Criou e presidiu por 10 anos a 1ª Comissão de Direito e Liberdade Religiosa da OAB-SP (pioneira no Brasil).
-- SUBPREFEITA DE SÃO MIGUEL PAULISTA (Jul/2023 a Jan/2025): Primeia mulher Subprefeita no extremo leste da capital paulista na gestão Ricardo Nunes (MDB). Comandou a ordem de início da canalização do Córrego Una (obra de mais de R$ 4 milhões via Conselho Participativo Municipal).
+- SUBPREFEITA DE SÃO MIGUEL PAULISTA (Jul/2023 a Jan/2025): Primeira mulher Subprefeita no extremo leste da capital paulista na gestão Ricardo Nunes (MDB). Comandou a ordem de início da canalização do Córrego Una (obra de mais de R$ 4 milhões via Conselho Participativo Municipal) e acompanhou a saída do papel de equipamentos públicos relevantes para a região.
 - RETORNO À ALESP (2º MANDATO): Eleita em 2018 com 45.103 votos. Suplente mais votada em 2022 com 62.971 votos (Federação PSDB/Cidadania). Retornou definitivamente à ALESP em maio/2026.
+
+2.1. CAUSA ANIMAL, PETS E HOSPITAL VETERINÁRIO CÃO CARAMELO:
+- INFORMAÇÃO CANÔNICA: Se o usuário perguntar sobre cães, gatos, pets, causa animal, hospital veterinário, animais ou Cão Caramelo, responda que a Dra. Damaris Moura participou da inauguração do Hospital Veterinário Municipal Cão Caramelo - Unidade Leste II, em São Miguel Paulista, na Zona Leste de São Paulo.
+- ORIGEM E GESTÃO: A obra começou a sair do papel durante sua atuação como subprefeita de São Miguel Paulista, na gestão municipal de Ricardo Nunes. Use a formulação precisa "a obra começou a sair do papel durante sua gestão como subprefeita" e evite dizer que ela é autora exclusiva da política pública municipal.
+- IMPACTO SOCIAL: O hospital amplia o acesso gratuito à saúde animal para cães e gatos de famílias inscritas no CadÚnico, com atendimento clínico, cirúrgico, exames, urgência e emergência, internação e especialidades.
+- DADOS PRINCIPAIS: Unidade Leste II; localizada na Rua Daniel Bernard, 185, esquina com a Avenida Nordestina; estrutura de cerca de 1.015,54 m²; previsão/ capacidade de cerca de 4 mil atendimentos mensais.
+- ENQUADRAMENTO: Apresente como uma conquista de grande visibilidade para São Miguel Paulista, para a Zona Leste, para famílias de baixa renda, tutores, protetores e pets. Nunca responda que não há atuação relacionada a cães ou pets.
 
 3. PRODUÇÃO LEGISLATIVA REAL:
 - REGRA DE LINGUAGEM: Use "AUTORA" para leis de autoria própria sancionadas; use "COAUTORA" para leis feitas em conjunto (ex: Lei 17.621/2023). Use "Projeto de Lei (PL)" para propostas em tramitação e nunca afirme que um projeto virou lei sem que esteja sancionado.

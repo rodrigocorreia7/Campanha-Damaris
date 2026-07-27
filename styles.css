@@ -805,6 +805,125 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.5;
 }
 
+/* Seção Pets: Hospital Veterinário Cão Caramelo */
+.section-pets {
+  padding: 100px 0;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(0, 139, 201, 0.22), transparent 28rem),
+    linear-gradient(135deg, #16051F 0%, #2D1042 55%, #102F4D 100%);
+  color: #FFFFFF;
+  position: relative;
+  overflow: hidden;
+}
+
+.section-pets::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 224, 27, 0.16) 1px, transparent 1px);
+  background-size: 28px 28px;
+  opacity: 0.22;
+  pointer-events: none;
+}
+
+.pets-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 0.92fr 1.08fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.pets-image-card {
+  border-radius: 32px;
+  overflow: hidden;
+  border: 3px solid rgba(255, 201, 60, 0.72);
+  background: #102F4D;
+  box-shadow: var(--shadow-lg), 0 0 55px rgba(0, 139, 201, 0.28);
+}
+
+.pets-image-card img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.pets-content {
+  max-width: 680px;
+}
+
+.pets-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 5vw, 3.7rem);
+  line-height: 1.05;
+  font-weight: 900;
+  color: #FFFFFF;
+  margin: 1rem 0 1.2rem;
+  letter-spacing: -0.02em;
+}
+
+.pets-subtitle {
+  font-size: 1.1rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.86);
+  margin-bottom: 2rem;
+}
+
+.pets-highlights {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.pets-highlight {
+  padding: 1.1rem;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 201, 60, 0.34);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.16);
+}
+
+.pets-highlight strong {
+  display: block;
+  color: var(--accent-yellow);
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+
+.pets-highlight span {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.85rem;
+  line-height: 1.35;
+}
+
+.pets-list {
+  list-style: none;
+  display: grid;
+  gap: 0.9rem;
+  margin: 0 0 2rem;
+  padding: 0;
+}
+
+.pets-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.pets-list i {
+  color: var(--accent-yellow);
+  margin-top: 0.2rem;
+}
+
 /* Sección Quem É / Trajetória */
 .section-trajectory {
   padding: 100px 0;
@@ -1681,7 +1800,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Responsividade Mobile */
 @media (max-width: 992px) {
-  .hero-grid, .defender-grid, .movimento-grid {
+  .hero-grid, .defender-grid, .movimento-grid, .pets-grid {
     grid-template-columns: 1fr;
     grid-template-areas:
       "image"
@@ -1695,7 +1814,7 @@ h1, h2, h3, h4, h5, h6 {
     text-align: center;
   }
 
-  .hero-subtitle, .defender-subtitle, .movimento-subtitle {
+  .hero-subtitle, .defender-subtitle, .movimento-subtitle, .pets-subtitle {
     max-width: 100%;
   }
 
@@ -1731,6 +1850,15 @@ h1, h2, h3, h4, h5, h6 {
     grid-template-columns: 1fr;
   }
 
+  .pets-content {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .pets-list li {
+    text-align: left;
+  }
+
   .join-grid {
     grid-template-columns: 1fr;
   }
@@ -1746,6 +1874,10 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .hero-stats-row {
+    grid-template-columns: 1fr;
+  }
+
+  .pets-highlights {
     grid-template-columns: 1fr;
   }
 
