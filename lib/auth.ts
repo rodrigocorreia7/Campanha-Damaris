@@ -182,6 +182,47 @@ export async function loginWithPassword(input: { email: string; password: string
   return { user: safeUser, token };
 }
 
+export async function resetAdminPassword(input: { email: string; setupCode: string; password: string }) {
+  const email = normalizeEmail(input.email);
+  const setupCode = normalizeCode(input.setupCode);
+  const password = String(input.password || '');
+  const adminSetupCode = normalizeCode(process.env.AUTH_ADMIN_SETUP_CODE || '');
+
+  assertEmail(email);
+  assertPassword(password);
+
+  if (!isAdminEmail(email) || !adminSetupCode || setupCode !== adminSetupCode) {
+    throw new AuthError('Código de redefinição inválido.', 403);
+  }
+
+  const users = await supabaseGet<AuthUser[]>(
+    `auth_users?email=eq.${encodeURIComponent(email)}&select=id,email,display_name,expires_at&limit=1`,
+  );
+  const user = users[0];
+
+  if (!user) {
+    throw new AuthError('Nenhum acesso admin foi encontrado para este e-mail. Use Primeiro acesso antes.', 404);
+  }
+
+  const now = new Date();
+  const passwordHash = await hashSecret(`password:${email}:${password}`);
+
+  await supabasePatch(
+    `auth_users?id=eq.${encodeURIComponent(user.id)}`,
+    {
+      password_hash: passwordHash,
+      expires_at: addHours(now, ADMIN_ACCESS_HOURS).toISOString(),
+    },
+  );
+
+  await supabasePatch(
+    `auth_sessions?user_id=eq.${encodeURIComponent(user.id)}&revoked_at=is.null`,
+    { revoked_at: now.toISOString() },
+  );
+
+  return { ok: true };
+}
+
 export async function logoutByCookie(cookieHeader: string | null) {
   const token = getCookie(cookieHeader, SESSION_COOKIE);
   if (!token) {

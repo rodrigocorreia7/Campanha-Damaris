@@ -3,6 +3,7 @@ const tabs = Array.from(document.querySelectorAll('[data-auth-tab]'));
 const forms = {
   login: document.querySelector('#login-form'),
   register: document.querySelector('#register-form'),
+  reset: document.querySelector('#reset-form'),
 };
 
 const nextUrl = new URLSearchParams(window.location.search).get('next') || '/';
@@ -23,8 +24,29 @@ forms.register.addEventListener('submit', (event) => {
   submitAuth('/api/auth-register', forms.register);
 });
 
-async function submitAuth(endpoint, form) {
-  const button = form.querySelector('button');
+forms.reset.addEventListener('submit', (event) => {
+  event.preventDefault();
+  submitAuth('/api/auth-reset-password', forms.reset, {
+    redirect: false,
+    successMessage: 'Senha redefinida. Agora entre com sua nova senha.',
+    nextMode: 'login',
+  });
+});
+
+document.querySelectorAll('[data-toggle-password]').forEach((toggle) => {
+  toggle.addEventListener('click', () => {
+    const field = toggle.closest('.password-field')?.querySelector('input');
+    if (!field) return;
+
+    const showPassword = field.type === 'password';
+    field.type = showPassword ? 'text' : 'password';
+    toggle.textContent = showPassword ? 'Ocultar' : 'Ver';
+    toggle.setAttribute('aria-label', showPassword ? 'Ocultar senha' : 'Mostrar senha');
+  });
+});
+
+async function submitAuth(endpoint, form, options = {}) {
+  const button = form.querySelector('button[type="submit"]');
   const payload = Object.fromEntries(new FormData(form).entries());
   button.disabled = true;
   setStatus('Validando acesso...', false);
@@ -41,8 +63,13 @@ async function submitAuth(endpoint, form) {
       throw new Error(data.error || 'Não foi possível liberar o acesso.');
     }
 
-    setStatus('Acesso liberado. Abrindo a apresentação...', false);
-    window.location.assign(nextUrl);
+    if (options.nextMode) {
+      setMode(options.nextMode);
+    }
+    setStatus(options.successMessage || 'Acesso liberado. Abrindo a apresentacao...', false);
+    if (options.redirect !== false) {
+      window.location.assign(nextUrl);
+    }
   } catch (error) {
     setStatus(error.message, true);
   } finally {

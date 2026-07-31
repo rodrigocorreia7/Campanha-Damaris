@@ -86,7 +86,7 @@ h1 {
 
 .tabs {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 8px;
   padding: 6px;
   margin-bottom: 22px;
@@ -143,6 +143,37 @@ input:focus {
   box-shadow: 0 0 0 4px rgba(255, 201, 60, 0.14);
 }
 
+.password-field {
+  position: relative;
+  display: block;
+}
+
+.password-field input {
+  padding-right: 78px;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  min-width: 54px;
+  height: 36px;
+  transform: translateY(-50%);
+  border: 1px solid rgba(255, 201, 60, 0.45);
+  border-radius: 999px;
+  color: var(--gold);
+  background: rgba(255, 201, 60, 0.1);
+  font: 800 12px Montserrat, Inter, sans-serif;
+  cursor: pointer;
+}
+
+.password-toggle:hover,
+.password-toggle:focus {
+  color: var(--purple-950);
+  background: linear-gradient(135deg, var(--yellow), var(--gold));
+  outline: none;
+}
+
 .primary-button {
   min-height: 58px;
   margin-top: 8px;
@@ -192,5 +223,14 @@ input:focus {
     width: 56px;
     height: 56px;
     font-size: 20px;
+  }
+
+  .tabs {
+    border-radius: 22px;
+  }
+
+  .tab {
+    padding: 11px 8px;
+    font-size: 11px;
   }
 }
