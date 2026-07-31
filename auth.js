@@ -71,7 +71,10 @@ async function submitAuth(endpoint, form, options = {}) {
       window.location.assign(nextUrl);
     }
   } catch (error) {
-    setStatus(error.message, true);
+    const message = error instanceof TypeError && error.message === 'Failed to fetch'
+      ? 'Não foi possível conectar agora. Aguarde o deploy terminar e tente novamente.'
+      : error.message;
+    setStatus(message, true);
   } finally {
     button.disabled = false;
   }
