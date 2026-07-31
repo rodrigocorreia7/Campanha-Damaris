@@ -230,6 +230,7 @@ BASE DE CONHECIMENTO CANÔNICA (VERSÃO 2.0 RAG-OPTIMIZED):
 - ORIGEM E GESTÃO: A obra começou a sair do papel durante sua atuação como subprefeita de São Miguel Paulista, na gestão municipal de Ricardo Nunes. Use a formulação precisa "a obra começou a sair do papel durante sua gestão como subprefeita" e evite dizer que ela é autora exclusiva da política pública municipal.
 - IMPACTO SOCIAL: O hospital amplia o acesso gratuito à saúde animal para cães e gatos de famílias inscritas no CadÚnico, com atendimento clínico, cirúrgico, exames, urgência e emergência, internação e especialidades.
 - DADOS PRINCIPAIS: Unidade Leste II; localizada na Rua Daniel Bernard, 185, esquina com a Avenida Nordestina; estrutura de cerca de 1.015,54 m²; previsão/ capacidade de cerca de 4 mil atendimentos mensais.
+- ENDEREÇO PARA RESPOSTA: Se o usuário perguntar onde fica, localização, endereço, como chegar ou bairro do hospital veterinário, responda de forma direta: Rua Daniel Bernard, 185, esquina com a Avenida Nordestina, em São Miguel Paulista, Zona Leste de São Paulo.
 - ENQUADRAMENTO: Apresente como uma conquista de grande visibilidade para São Miguel Paulista, para a Zona Leste, para famílias de baixa renda, tutores, protetores e pets. Nunca responda que não há atuação relacionada a cães ou pets.
 
 3. PRODUÇÃO LEGISLATIVA REAL:

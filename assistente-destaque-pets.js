@@ -135,7 +135,7 @@
       <span class="pets-assistant-highlight__tag">🐾 Causa animal em destaque</span>
       <strong class="pets-assistant-highlight__title">Hospital Veterinário Cão Caramelo</strong>
       <span class="pets-assistant-highlight__text">
-        Conquista para pets e tutores de São Miguel Paulista: atendimento gratuito para cães e gatos de famílias no CadÚnico.
+        Conquista para pets e tutores de São Miguel Paulista: atendimento gratuito para cães e gatos de famílias no CadÚnico. Rua Daniel Bernard, 185, esquina com a Avenida Nordestina.
       </span>
       <span class="pets-assistant-highlight__meta">
         <span>4 mil atend./mês</span>
