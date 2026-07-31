@@ -22,7 +22,7 @@
       </div>
 
       <p class="lead">
-        Este site e a assistente virtual estão em análise. O acesso é liberado somente por convite e expira em 48 horas.
+        Este site e a assistente virtual estão em análise. Convidados entram por convite de 48 horas; administradores autorizados podem criar acesso permanente.
       </p>
 
       <div class="tabs" role="tablist" aria-label="Escolha o tipo de acesso">
@@ -45,7 +45,7 @@
       <form class="auth-form" id="register-form">
         <label>
           Código do convite
-          <input type="text" name="inviteCode" autocomplete="one-time-code" placeholder="DAMARIS-XXXX" required>
+          <input type="text" name="inviteCode" autocomplete="one-time-code" placeholder="DAMARIS-XXXX ou código admin" required>
         </label>
         <label>
           Nome
@@ -59,7 +59,7 @@
           Criar senha
           <input type="password" name="password" autocomplete="new-password" minlength="8" required>
         </label>
-        <button class="primary-button" type="submit">Liberar acesso por 48h</button>
+        <button class="primary-button" type="submit">Liberar acesso</button>
       </form>
 
       <p class="status-message" id="auth-status" role="status" aria-live="polite"></p>

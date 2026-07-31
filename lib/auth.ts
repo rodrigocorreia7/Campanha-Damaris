@@ -28,6 +28,7 @@ type InviteRow = {
 
 const SESSION_COOKIE = 'damaris_session';
 const ACCESS_HOURS = 48;
+const ADMIN_ACCESS_HOURS = 24 * 365 * 10;
 const SESSION_MAX_AGE_SECONDS = ACCESS_HOURS * 60 * 60;
 
 export class AuthError extends Error {
@@ -72,11 +73,15 @@ export async function validateSessionToken(token: string): Promise<ValidSession 
   }
 
   const users = await supabaseGet<AuthUser[]>(
-    `auth_users?id=eq.${encodeURIComponent(session.user_id)}&expires_at=gt.${encodeURIComponent(now)}&select=id,email,display_name,expires_at&limit=1`,
+    `auth_users?id=eq.${encodeURIComponent(session.user_id)}&select=id,email,display_name,expires_at&limit=1`,
   );
 
   const user = users[0];
   if (!user) {
+    return null;
+  }
+
+  if (new Date(user.expires_at).getTime() <= Date.now() && !isAdminEmail(user.email)) {
     return null;
   }
 
@@ -93,20 +98,27 @@ export async function registerWithInvite(input: {
   const email = normalizeEmail(input.email);
   const password = String(input.password || '');
   const displayName = String(input.displayName || '').trim() || null;
+  const adminAccess = isAdminEmail(email);
+  const adminSetupCode = normalizeCode(process.env.AUTH_ADMIN_SETUP_CODE || '');
+  const adminSetupAccess = adminAccess && Boolean(adminSetupCode) && inviteCode === adminSetupCode;
 
   assertEmail(email);
   assertPassword(password);
 
-  const inviteHash = await hashSecret(`invite:${inviteCode}`);
   const now = new Date();
   const nowIso = now.toISOString();
-  const invites = await supabaseGet<InviteRow[]>(
-    `auth_invites?code_hash=eq.${encodeURIComponent(inviteHash)}&revoked_at=is.null&expires_at=gt.${encodeURIComponent(nowIso)}&select=id,code_hash,label,max_uses,uses,expires_at,revoked_at&limit=1`,
-  );
-  const invite = invites[0];
+  let invite: InviteRow | null = null;
 
-  if (!invite || invite.uses >= invite.max_uses) {
-    throw new AuthError('Convite inválido, expirado ou já utilizado.', 403);
+  if (!adminSetupAccess) {
+    const inviteHash = await hashSecret(`invite:${inviteCode}`);
+    const invites = await supabaseGet<InviteRow[]>(
+      `auth_invites?code_hash=eq.${encodeURIComponent(inviteHash)}&revoked_at=is.null&expires_at=gt.${encodeURIComponent(nowIso)}&select=id,code_hash,label,max_uses,uses,expires_at,revoked_at&limit=1`,
+    );
+    invite = invites[0] || null;
+
+    if (!invite || invite.uses >= invite.max_uses) {
+      throw new AuthError('Convite inválido, expirado ou já utilizado.', 403);
+    }
   }
 
   const existing = await supabaseGet<AuthUser[]>(
@@ -117,7 +129,7 @@ export async function registerWithInvite(input: {
     throw new AuthError('Este e-mail já tem cadastro. Use a opção Entrar.', 409);
   }
 
-  const userExpiresAt = addHours(now, ACCESS_HOURS).toISOString();
+  const userExpiresAt = addHours(now, adminAccess ? ADMIN_ACCESS_HOURS : ACCESS_HOURS).toISOString();
   const passwordHash = await hashSecret(`password:${email}:${password}`);
   const createdUsers = await supabasePost<AuthUser[]>('auth_users', {
     email,
@@ -131,14 +143,16 @@ export async function registerWithInvite(input: {
     throw new AuthError('Não foi possível criar o acesso agora.', 500);
   }
 
-  await supabasePatch(
-    `auth_invites?id=eq.${encodeURIComponent(invite.id)}`,
-    {
-      uses: invite.uses + 1,
-      used_at: nowIso,
-      used_by: user.id,
-    },
-  );
+  if (invite) {
+    await supabasePatch(
+      `auth_invites?id=eq.${encodeURIComponent(invite.id)}`,
+      {
+        uses: invite.uses + 1,
+        used_at: nowIso,
+        used_by: user.id,
+      },
+    );
+  }
 
   const token = await createSession(user.id, input.email);
   return { user, token };
@@ -159,7 +173,7 @@ export async function loginWithPassword(input: { email: string; password: string
     throw new AuthError('E-mail ou senha inválidos.', 401);
   }
 
-  if (new Date(user.expires_at).getTime() <= Date.now()) {
+  if (new Date(user.expires_at).getTime() <= Date.now() && !isAdminEmail(user.email)) {
     throw new AuthError('Este acesso expirou. Gere um novo convite para liberar mais 48 horas.', 403);
   }
 
@@ -319,6 +333,16 @@ function normalizeEmail(value: string) {
 
 function normalizeCode(value: string) {
   return String(value || '').trim().toUpperCase().replace(/\s+/g, '');
+}
+
+function isAdminEmail(email: string) {
+  const normalizedEmail = normalizeEmail(email);
+  const adminEmails = String(process.env.AUTH_ADMIN_EMAILS || '')
+    .split(/[,\s;]+/)
+    .map(normalizeEmail)
+    .filter(Boolean);
+
+  return adminEmails.includes(normalizedEmail);
 }
 
 function assertEmail(email: string) {
